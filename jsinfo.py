@@ -47,14 +47,14 @@ class JSINFO:
         self.root_domains = []
         target = args.target
         if not target.startswith(('http://', 'https://')) and not os.path.isfile(target):
-            target = 'http://' + target
+            target = 'https://' + target
         elif os.path.isfile(target):
             with open(target, 'r+', encoding='utf-8') as f:
                 for domain in f:
                     domain = domain.strip()
                     if not domain.startswith(('http://', 'https://')):
                         self.root_domains.append(domain)
-                        domain = 'http://www.' + domain
+                        domain = 'https://' + domain
                         self.queue.put(domain)
         if args.keywords is None:
             keyword = extract(target).domain
